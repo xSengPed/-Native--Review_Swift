@@ -131,7 +131,7 @@ var code : Int? = nil
         let nc_b : Int = 2
         let nc_c : Int = 3
 
-            if nc_a < nc_b , nc_c < nc_a , nc_b == nc_c   { // 1 < 2 , 3 < 1 : False, False
+            if nc_a < nc_b , nc_c < nc_a    { // 1 < 2 , 3 < 1 : False, False
                 print("If Above condition is True Excute this line")
             }
             else if nc_a == nc_b , nc_c == nc_a {
@@ -312,7 +312,7 @@ func getStatus(status : Int ,msg : String)  -> (status : Int ,msg : String){
 
     show(message: "done!")
 
-/* Validatic Parameters */
+/* Variadic Parameters */
 
 func getAvg(numbers : Double...)  -> Double {
     let count : Int = numbers.count
@@ -342,21 +342,53 @@ func getAvg(numbers : Double...)  -> Double {
         numbers.sort(by:{$0 > $1})
         print(numbers)
 
+
 // [ Type Alias ] - TBC
-
-    typealias AdditionFunction = (Int , Int) -> Int
-    typealias AverageFunction = ([Double]) -> Double
-
-    var myFunc : AdditionFunction = additionWithPostionArgument
+ 
+    var foo : (Int , Int ) -> Int // Function Type
+        foo = additionWithPostionArgument(x:y:)
+        
+    typealias AdditionFunction = (Int , Int) -> Int // New type has been defined
+    typealias AverageFunction = (Double...) -> Double
     
-    func getResult(a : Int , c : AdditionFunction) -> Int {
-            return myFunc(a,a)
-    }
+        var find_addition : AdditionFunction
+            find_addition = additionWithPostionArgument(x:y:)
 
+        func calculate(a : Int , b : Int , c : AdditionFunction) -> Int {
+            return (c(a,b))
+        }
+        
+        print("[ Calculated ] -> \(calculate(a: 2, b: 3, c: find_addition))")
+        
 
+        var find_average : AverageFunction
+            find_average = getAvg(numbers:)
 
+        func sumWithAverage(a : Int ,numbers :  Double..., avg : AverageFunction ) -> Double {
+        
+            return Double(a) + avg(1,2,3,4,5)
+        }
+        
+        var sumWithAvgResult : Double = sumWithAverage(a: 100, numbers: 2,4,6,8, avg: find_average)
+            print("[ SumWithAvgResult ] -> \(sumWithAvgResult)")
 
+/*
+ [ Object Oriented Programing (Protocal-Oriented Programing) ]
+*/
 
+var person : Person = Person(firstName: "Donnukrit", lastName: "Satirakul", age: 26, gender: "M")
 
+    person.introduce()
 
+var student : Student =  Student(firstName: "John", lastName: "Doe", age: 26, gender: "M", faculty: "Faculty of Science")
 
+    student.introduce()
+
+var personStruct : PersonStruct = PersonStruct(firstName: "TEST_FIRSTNAME", lastName: "TEST_TEST_FIRSTNAME",age: 22)
+
+    personStruct.introduce()
+    personStruct.speak()
+    personStruct.run()
+    personStruct.walk()
+    personStruct.jump()
+    

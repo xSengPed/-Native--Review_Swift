@@ -6,6 +6,7 @@ class Human {
     var lastName : String?
     
     // computed property
+    
     var fullName : String {
         // Read
         get {
