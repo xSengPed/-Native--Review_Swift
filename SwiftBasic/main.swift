@@ -135,7 +135,7 @@ var code : Int? = nil
                 print("If Above condition is True Excute this line")
             }
             else if nc_a == nc_b , nc_c == nc_a {
-                print("If nc_a == nc_b , nc_c == nc_a  is True Excute this line")
+                print("If nc_a == nc_b , nc_c == nc_a (All Equal)  is True Excute this line")
             }
             else {
                 print("If Above condition is False Excute this line")
@@ -190,7 +190,7 @@ var code : Int? = nil
 // MARK 3 : - Enumerations //
 
 enum PinStatus {
-    case Granted , Denied, Incorrect
+    case Granted , Denied, Incorrect, InActive
 }
 
 // [ Enum with Default Value ]
@@ -208,223 +208,155 @@ enum Message {
     case OK(desc : String)
 }
 
-enum Days {
-    case monday , tuesday , wednesday
-}
+// [ Enum Implementation ]
 
+    // Regular Enum
 
+    var pinStatus : PinStatus = .InActive
 
+        if pinStatus == .Denied , pinStatus == .Incorrect  {
+            print("[ PIN ] -> Access Denied")
+        }
+        else if (pinStatus == .Granted) {
+            print("[ PIN ] -> Access Granted")
+        } else {
+            print("[ PIN ] -> Show Pin Pad")
+        }
 
-// Switch
+    // Get Raw Value of Enum
 
-let aa : Days = .tuesday
+        var httpStatus : HttpStatus = .InteralServerError
+            print("[ Enum ] -> Raw Value -> \(httpStatus.rawValue)")
 
-switch aa {
-    
-    case Days.monday :
-        print("this is monday")
-    case .tuesday :
-        print("this is tuesday")
-    default :
-        print("not such a day")
-}
+    // Raw Value Definedable Enum
 
-
-
-var score  = 77
-
-switch score {
-    case 95,96,97,98,99 :
-        print("A+")
-    case 80...94 :
-        print("A")
-    case 70..<80 :
-        print("B")
-    default :
-        print("error")
-}
-
-
-
-
-//var words : [Any]  = ["Hello World",123]
-
-func foo(x : Int , y : Int) -> Int {
-     return x + y
-}
-
-
-var r = foo(x : 10 , y : 20)
-
-
-var aaa = 10
-
-
-// Function
-
-// () -> Void
-func hello () {
-        print("Hello World")
-    
-}
-
-
-func hello(name : String , age : Int , gender : String = "Male" ) {
-    print("Hello \(name) \(age) \(gender)")
-}
-
-func hello(_ name : String ,_ age : Int ) {
-    print("Hello \(name) \(age)")
-}
-
-
-func showMessage(message : String) {
-    
-}
-
-/// Pro
-
-func show(message text : String) {
-    
-}
-
-
-
-func show(name : String) {
-    
-}
-
-
-func diff(between : Int , and : Int) {
-    
-    
-}
-
-// (Int , Int ) -> Int
-func sum(a : Int , b : Int) -> Int {
-    return a + b
-}
-
-// Return Tuple
-func getStatus() -> (code : Int , message : String) {
-
-    return (200,"OK")
-}
-
-let bb = getStatus()
-
-print(bb.code)
-print(bb.message)
-
-
-
-func avg(numbers : Double...) -> Double {
-    var sum = 0.0
-    
-    
-    for n in numbers {
+        var msg : Message = .OK(desc: "Message is Ok!")
+            print("[ Enum ] -> Raw Value -> \(msg)")
         
-        sum += n
+// [ Function ]
+
+    // [Simple Function]
+
+    /*
+         func fn_name(arg : <arg_type> , arg : <arg_type>) -> <return_type> {
+                /
+                    Do something !
+                /
+         }
+    */
+
+/* Void Function ( No Return ) */
+
+func printSomething() { // if function is void unneccessary to add return type -> Void
+    print("Print Something!")
+}
+// Excuting Function
+
+    printSomething()
+
+/* Return Function */
+
+var fn_result = 0
+
+func additionWithPostionArgument(x : Int , y : Int) -> Int {
+    // You can add return or not if func has one line
+    x + y // same as return x + y
+}
+
+    fn_result = additionWithPostionArgument(x: 10, y: 20)
+        print("Ex.1 -> \(fn_result)")
+
+func additionWithOutPostionArgument(_ x : Int ,_ y : Int) -> Int {
+    x + y // same as return x + y
+}
+
+    fn_result = additionWithOutPostionArgument(30, 40)
+        print("Ex.2 -> \(fn_result)")
+
+func additionWithArgumentLabel(postion_a x : Int ,position_b y : Int) -> Int {
+    x + y // same as return x + y
+}
+
+    fn_result = additionWithArgumentLabel(postion_a: 10, position_b: 5)
+        print("Ex.3 -> \(fn_result)")
+
+/* Function with Optional Default Value */
+
+func division(x : Float , y : Float = 1.0) -> Float {
+    x / y
+}
+
+/* Tuple Return Function */
+func getStatus(status : Int ,msg : String)  -> (status : Int ,msg : String){
+    return (status , msg)
+}
+
+    var statusTuple = getStatus( status: 200,  msg: "OK")
+        print("[getStatus] -> \(statusTuple.status) , \(statusTuple.msg)")
+
+// How Declare Function Professional Style For Swift
+
+    func show(message text : String){
+        print("show -> \(text)")
     }
 
-    return sum / Double(numbers.count)
+    func show(status code : Int){
+        print("show -> \(code)")
+    }
+
+    func difference(between x : Int , and y : Int) -> Int {
+            x - y
+    }
+
+    show(status: 200)
+
+    show(message: "done!")
+
+/* Validatic Parameters */
+
+func getAvg(numbers : Double...)  -> Double {
+    let count : Int = numbers.count
+    var sum : Double = 0
+    for number in numbers {
+        sum += number
+    }
+    return sum / Double(count)
 }
+    var average : Double = getAvg(numbers: 1,2,3,4,5,6,7,8,9,10)
+        print("Average -> \(average)")
 
+// [ Pointer / Call By Reference ]
 
-// Pointer / Call By Reference
-func swap(a : inout Int ,  b : inout Int) {
-    let temp = a
-    a = b
-    b = temp
-}
-
-
-
-
-// Function Type
-var myFunc : (Int, Int) -> Int
-myFunc = sum
-
-typealias SumFunction = (Int , Int) -> Int
-
-//print(myFunc(10, 20))
-
-var dd = 10
-var ee = 20
-
-swap(a: &dd, b: &ee)
-
-func add(_ a : Int , _ b : Int) -> Int {
-     a + b
-}
-
-
-func sub(_ a : Int , _ b: Int) -> Int {
-    a-b
-}
-
-
-func cal(_ a : Int , _ b : Int , _ c : SumFunction) -> Int {
-    c (a,b)
-}
-
-
-var ff = cal(10 , 20 , add)
-
-print(ff)
-
-// Closure
-
-//{
-//    (_ a : Int , _ b :Int ) -> Int {
-//        in
-//        a + b
-//    }
-//}
-
-//ff = cal (10 , 20 , {(a , b) in a + b}
-
-ff = cal (10 , 20 ) {$0  + $1}
-print(ff)
-
-var numbers = [1,2,3,4,5]
-
-numbers.sort(by:{$0 > $1})
-
-print(numbers)
-
-var a = Human()
-
-
-a.name = "Donnukrit"
-
-
-var b = Human()
-
-
-print(b.fullName)
-
-b.speak()
-
-func sumAll(values : Int...) -> (result : Int , error : String?, message :String ){
-
-    return (100, "err" , "ok")
+    func swap(a : inout Int ,  b : inout Int) {
+        let temp = a
+        a = b
+        b = temp
+    }
+    var dd = 10
+    var ee = 20
+        swap(a: &dd, b: &ee)
     
-}
+// [ Closure ]
 
+    var numbers = [1,2,3,4,5]
+        numbers.sort(by:{$0 > $1})
+        print(numbers)
 
-var rrr = sumAll(values: 1,2,3,4,5)
+// [ Type Alias ] - TBC
 
+    typealias AdditionFunction = (Int , Int) -> Int
+    typealias AverageFunction = ([Double]) -> Double
 
-if rrr.error != nil {
+    var myFunc : AdditionFunction = additionWithPostionArgument
     
-}
+    func getResult(a : Int , c : AdditionFunction) -> Int {
+            return myFunc(a,a)
+    }
 
 
-var aaaa = Human()
-
-var hm = HumanStruct(name: "Human")
 
 
-hm.walk()
-hm.run()
+
+
+
+
