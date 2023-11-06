@@ -455,7 +455,7 @@ func search(text: String?) throws -> String {
 // Method 1 - With do-catch
 
 do {
-    let result = try search(text: "folk")
+    let result = try search(text: "Folk")
     print("Search Result -> \(result)")
 } catch SearchStatus.NotFound {
     print("Search Not Found")
@@ -467,6 +467,6 @@ do {
 }
 
 // Method 2 - with try?
-if let result = try? search(text: "phone") {
+if let result = try? search(text: "Phone") {
     print("Search Result -> \(result)")
 }
