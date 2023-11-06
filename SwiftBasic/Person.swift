@@ -1,27 +1,24 @@
 //  Created by Donnukrit Satirakul on 3/11/2566 BE.
 
 class Person {
-    
     // Store Property
     
-    var firstName : String?
-    var lastName : String?
-    var age : Int = 0
-    var gender : String?
-    
+    var firstName: String?
+    var lastName: String?
+    var age: Int = 0
+    var gender: String?
     
     // Computed Property
     
-    var fullname : String {
-        
+    var fullname: String {
         // Getter
         
         get {
-            guard  let firstName = firstName else {
+            guard let firstName = firstName else {
                 return ""
             }
         
-            guard  let lastName = lastName else {
+            guard let lastName = lastName else {
                 return ""
             }
             return "\(firstName) \(lastName)"
@@ -35,17 +32,15 @@ class Person {
             guard fullName.count >= 1 else {
                 return
             }
-                self.firstName = String(fullName[0])
+            firstName = String(fullName[0])
             
             guard fullName.count >= 2 else {
                 return
             }
         
-                self.lastName = String(fullName[1])
-        
+            lastName = String(fullName[1])
         }
     }
-    
     
     // Constructor
     
@@ -56,28 +51,24 @@ class Person {
         self.gender = gender
     }
     
-    
     func introduce() {
         print("My name is \(fullname). I am \(age) years old. I am \(gender ?? "M")")
     }
 }
 
-class Student : Person {
-    var faculty : String?
-     init(firstName: String? = nil, lastName: String? = nil, age: Int, gender: String? = nil , faculty : String ) {
-        
+class Student: Person {
+    var faculty: String?
+    init(firstName: String? = nil, lastName: String? = nil, age: Int, gender: String? = nil, faculty: String) {
         super.init(firstName: firstName, lastName: lastName, age: age, gender: gender)
         self.faculty = faculty
-        
     }
     
     override func introduce() {
-        print("My name is \(fullname). I am \(age) years old. I am \(gender ?? "M") , \(self.faculty ?? "")")
+        print("My name is \(fullname). I am \(age) years old. I am \(gender ?? "M") , \(faculty ?? "")")
     }
 }
 
 protocol PersonProtocol {
-    
 //    var firstName : String { get set }
 //    var lastName : String {get set }
     
@@ -86,21 +77,16 @@ protocol PersonProtocol {
     func run()
 }
 
-
-protocol StudentProtocol {
-    
-}
-
+protocol StudentProtocol {}
 
 // Adopt and Conform
 
-struct PersonStruct : PersonProtocol {
-    
-    var firstName : String?
-    var lastName : String?
-    var age : Int
+struct PersonStruct: PersonProtocol {
+    var firstName: String?
+    var lastName: String?
+    var age: Int
      
-    func introduce () {
+    func introduce() {
         print("\(firstName ?? "") \(lastName ?? "") | \(age)")
     }
     
@@ -115,13 +101,9 @@ struct PersonStruct : PersonProtocol {
     func run() {
         print("\(firstName ?? "") is Running...")
     }
-    
-    
 }
 
-struct StudentStruct : StudentProtocol {
-    
-}
+struct StudentStruct: StudentProtocol {}
 
 extension PersonStruct {
     func jump() {
