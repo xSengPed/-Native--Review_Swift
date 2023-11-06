@@ -430,3 +430,43 @@ var order_2 = OrderMessage(id: 2)
 
 order.process(message: order_1)
 order.process(message: order_2)
+
+// Error Handling
+
+enum SearchStatus: Error {
+    case NotFound
+    case InvalidRequest
+}
+
+func search(text: String?) throws -> String {
+    let names: Set = ["Phone", "Folk", "Rose", "Ploy", "Wish"]
+
+    guard let text = text else {
+        throw SearchStatus.InvalidRequest
+    }
+
+    guard names.contains(text) else {
+        throw SearchStatus.NotFound
+    }
+
+    return text
+}
+
+// Method 1 - With do-catch
+
+do {
+    let result = try search(text: "ploy")
+    print("Search Result -> \(result)")
+} catch SearchStatus.NotFound {
+    print("Search Not Found")
+
+} catch SearchStatus.InvalidRequest {
+    print("Search Invalid")
+} catch {
+    print("Search Failed")
+}
+
+// Method 2 - with try?
+if let result = try? search(text: "phone") {
+    print("Search Result -> \(result)")
+}

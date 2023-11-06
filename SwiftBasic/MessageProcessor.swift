@@ -1,6 +1,10 @@
 // Chain of Responsibility : Design Pattern [ Pipeline ]
 // MessageProcessor Demo
 
+
+
+
+
 // Protocol First !
 
 protocol Message {
